@@ -4,7 +4,11 @@ import Navbar from './components/Navbar';
 import Alerts from './components/Alerts';
 import TextUtils from './components/TextUtils';
 import About from './components/About';
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
 
 function App() {
@@ -23,12 +27,12 @@ function App() {
     if (mode === 'light') {
       setMode('dark')
       document.body.style.backgroundColor = '#042743'
-      showAlert("Dark Mode has been enable", "primary")
+      showAlert("Dark Mode has been enable", "success")
     }
     else {
       setMode('light')
       document.body.style.backgroundColor = 'white'
-      showAlert("Light Mode has been enable", "primary")
+      showAlert("Light Mode has been enable", "success")
     }
   }
 
@@ -37,13 +41,20 @@ function App() {
   }, 3000);
 
   return (
-    <div >
-      <Navbar mode={mode} toggleMode={toggleMode} />
-      <Alerts alert={alert} />
-      {/* <TextUtils mode={mode} showAlert={showAlert} /> */}
-      <About mode={mode}/>
-    </div>
-
+    <>
+      <Router>
+        <Navbar mode={mode} toggleMode={toggleMode} />
+        <Alerts alert={alert} />
+        <Switch>
+          <Route path="/about">
+            <About mode={mode} />
+          </Route>
+          <Route path="/">
+            <TextUtils mode={mode} showAlert={showAlert} />
+          </Route>
+        </Switch>
+      </Router>
+    </>
   );
 }
 
