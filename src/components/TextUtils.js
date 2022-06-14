@@ -5,7 +5,6 @@ import React from 'react'
 export default function TextUtils(props) {
     const [text, setText] = useState('');
 
-
     const handleOnChange = (event) => {
         setText(event.target.value);
     }
@@ -15,51 +14,47 @@ export default function TextUtils(props) {
 
         if (text === newText) {
             setText(text.toLowerCase());
-            props.alert('Case is now LowerCase', 'primary');
+            props.showAlert('Converted into Lowercase', 'success');
         }
         else {
             setText(newText);
-            props.alert('Case is now UpperCase', 'primary');
+            props.showAlert('Converted into Uppercase', 'success');
         }
     }
 
     const handleCopy = () => {
         let text = document.getElementById('mybox');
-        text.select()
         navigator.clipboard.writeText(text.value)
+        props.showAlert('Copied to clipboard', 'success');
     }
     const clear = () => {
         let newText = ''
         setText(newText);
+        props.showAlert('Cleared', 'success');
 
     }
     const removeExtraSpaces = () => {
         let newText = text.split(/[ ]+/)
         setText(newText.join(' '))
-    }
-    const Trim = () => {
-
+        props.showAlert('Removed extra spaces', 'success');
     }
 
     return (
-        <div className='container my-5' style={{ color: props.mode === 'dark' ? "white" : "black" }}>
+        <div className='container mt-4' style={{ color: props.mode === 'dark' ? "white" : "black" }}>
             <div className="mb-3">
-                <h4 className="form-label">Enter Your Text to Analyze</h4>
-                <textarea className="form-control" value={text} onChange={handleOnChange} id="mybox" rows="10" placeholder="Enter Your Text Here"></textarea>
+                <h1 className="form-label">Try TextUtils - Word counter, Character counter, Remove extra spaces</h1>
+                <textarea className="form-control" value={text} onChange={handleOnChange} id="mybox" rows="10" placeholder="Enter Your Text Here" style={{ color: props.mode === 'dark' ? "white" : "black", backgroundColor: props.mode==='dark'?'rgb(36 74 104)':'white'}}></textarea>
             </div>
             <div className="container">
-                <button type="button" className="btn btn-primary mx-1 my-1">Random</button>
-                <button type="button" className="btn btn-primary mx-1 my-1" onClick={Case}>Change Case</button>
-                <button type="button" className="btn btn-primary mx-1 my-1" onClick={Trim}>Trim</button>
-                <button type="button" className="btn btn-primary mx-1 my-1">Sort (Asec/Desc)</button>
-                <button type="button" className="btn btn-primary mx-1 my-1" onClick={removeExtraSpaces}>Remove Every Whitespace</button>
-                <button type="button" className="btn btn-primary mx-1 my-1" onClick={handleCopy}>Clip Text to Clipbored</button>
-                <button type="button" className="btn btn-danger mx-1 my-1" onClick={clear}>Clear Output</button>
+                <button disabled={text.length===0} type="button" className="btn btn-primary mx-1 my-1" onClick={Case}>Change Case</button>
+                <button disabled={text.length===0} type="button" className="btn btn-primary mx-1 my-1" onClick={removeExtraSpaces}>Remove Every Whitespace</button>
+                <button disabled={text.length===0} type="button" className="btn btn-primary mx-1 my-1" onClick={handleCopy}>Clip Text to Clipbored</button>
+                <button disabled={text.length===0} type="button" className="btn btn-danger mx-1 my-1" onClick={clear}>Clear Output</button>
             </div>
             <div className="container my-4">
                 <h4>Your Text Summary</h4>
-                <p>No. of words {(text.split(" ").length) - 1} and No. of Characters {text.length}</p>
-                <p>Minutes to read: {0.008 * text.split(" ").length}</p>
+                <p>No. of words {(text.split(" ").filter((str)=>{return str.length!==0}).length)} and No. of Characters {text.length}</p>
+                <p>Minutes to read: {0.008 * text.split(" ").filter((str)=>{return str.length!==0}).length}</p>
             </div>
             <div className="container my-3">
                 <h5>Features we cover:</h5>

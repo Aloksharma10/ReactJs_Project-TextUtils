@@ -1,8 +1,8 @@
 import './App.css';
-import Navbar from './components/Navbar';
-import TextUtils from './components/TextUtils';
 import React, { useState } from 'react';
+import Navbar from './components/Navbar';
 import Alerts from './components/Alerts';
+import TextUtils from './components/TextUtils';
 import About from './components/About';
 
 
@@ -12,12 +12,12 @@ function App() {
 
   const [alert, setAlert] = useState(null)
 
-const showAlert = (message, type)=>{
-  setAlert({
-    msg: message,
-    type: type
-  })
-}
+  const showAlert = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type
+    })
+  }
 
   const toggleMode = () => {
     if (mode === 'light') {
@@ -25,7 +25,7 @@ const showAlert = (message, type)=>{
       document.body.style.backgroundColor = '#042743'
       showAlert("Dark Mode has been enable", "primary")
     }
-    else{
+    else {
       setMode('light')
       document.body.style.backgroundColor = 'white'
       showAlert("Light Mode has been enable", "primary")
@@ -33,15 +33,15 @@ const showAlert = (message, type)=>{
   }
 
   setTimeout(() => {
-    setAlert(null);   
+    setAlert(null);
   }, 3000);
 
   return (
     <div >
       <Navbar mode={mode} toggleMode={toggleMode} />
-      <Alerts alert={alert}/>
-      {/* <TextUtils mode={mode}/> */}
-      <About/>
+      <Alerts alert={alert} />
+      {/* <TextUtils mode={mode} showAlert={showAlert} /> */}
+      <About mode={mode}/>
     </div>
 
   );
