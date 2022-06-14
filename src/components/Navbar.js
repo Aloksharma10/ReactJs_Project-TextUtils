@@ -21,7 +21,10 @@ export default function Navbar(props) {
                             </li>
                         </ul>
                         <div className="form-check form-switch">
-                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={props.toggleMode}/>
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={props.toggleMode} />
+                            {/* <button className="btn bg-success" onClick={()=>toggleMode(props.toggleMode)}></button> */}
+                            {/* <button className="btn bg-danger" onClick={props.toggleMode}></button> */}
+
                         </div>
                         <form className="d-flex" role="search">
                             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />

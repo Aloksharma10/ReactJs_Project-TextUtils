@@ -12,7 +12,6 @@ import {
 
 
 function App() {
-  const [mode, setMode] = useState('light')
 
   const [alert, setAlert] = useState(null)
 
@@ -23,7 +22,9 @@ function App() {
     })
   }
 
-  const toggleMode = () => {
+  const [mode, setMode] = useState('light')
+  const toggleMode = (cls) => {
+    
     if (mode === 'light') {
       setMode('dark')
       document.body.style.backgroundColor = '#042743'
