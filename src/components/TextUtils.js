@@ -34,7 +34,7 @@ export default function TextUtils(props) {
 
     }
     const removeExtraSpaces = () => {
-        let newText = text.split(/[ ]+/)
+        let newText = text.split(/\s+/)
         setText(newText.join(' '))
         props.showAlert('Removed extra spaces', 'success');
     }
